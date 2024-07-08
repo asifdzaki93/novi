@@ -15,7 +15,7 @@
                 <center>
 
                     <div class="">
-                        <img class="img-responsive" src="<?php echo base_url('uploads/qr_image/') . $id_karyawan . 'code.png'; ?>" style="width: 35%; height: auto;" />
+                        <img class="img-responsive" src="<?php echo base_url('uploads/qr_image/') . $id_karyawan . 'code.png'; ?>" style="width: 35%; height: auto;" onclick="showLargeQR(this)" />
                     </div>
                     <!-- /.widget-user-image -->
                     <h3 class=""><?php echo $nama_karyawan ?></h3>
@@ -41,5 +41,23 @@
         document.body.innerHTML = printContents;
         window.print();
         document.body.innerHTML = originalContents;
+    }
+
+    function showLargeQR(element) {
+        var largeQR = document.createElement('div');
+        largeQR.innerHTML = '<img src="' + element.src + '" style="width: 150%; height: auto;" />';
+        largeQR.style.position = 'fixed';
+        largeQR.style.top = '50%';
+        largeQR.style.left = '50%';
+        largeQR.style.transform = 'translate(-50%, -50%)';
+        largeQR.style.zIndex = '9999';
+        largeQR.style.backgroundColor = 'rgba(0, 0, 0, 0.5)';
+        largeQR.style.padding = '20px';
+        largeQR.style.borderRadius = '10px';
+        largeQR.style.boxShadow = '0 4px 8px rgba(0, 0, 0, 0.2)';
+        document.body.appendChild(largeQR);
+        largeQR.onclick = function() {
+            this.remove();
+        };
     }
 </script>

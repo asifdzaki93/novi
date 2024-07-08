@@ -1,5 +1,4 @@
 <?php
-
 class Scan extends Ci_Controller
 {
 	function __construct()
@@ -19,15 +18,11 @@ class Scan extends Ci_Controller
 
 	public function messageAlert($type, $title)
 	{
-		$messageAlert = "const Toast = Swal.mixin({
-			toast: true,
-			position: 'top-end',
+		$messageAlert = "Swal.fire({
+			type: '" . $type . "',
+			title: '" . $title . "',
 			showConfirmButton: false,
 			timer: 3000
-		});
-		Toast.fire({
-			type: '" . $type . "',
-			title: '" . $title . "'
 		});";
 		return $messageAlert;
 	}
@@ -59,7 +54,7 @@ class Scan extends Ci_Controller
 		$shift_start_time_1 = strtotime("08:00:00");
 		$shift_end_time_1 = strtotime("19:00:00");
 		$shift_start_time_2 = strtotime("19:00:00");
-		$shift_end_time_2 = strtotime("08:00:00");
+		$shift_end_time_2 = strtotime("08:00:00 +1 day"); // tambahkan +1 day untuk shift 2
 		$current_time = strtotime($jam_msk);
 
 		// Tentukan shift saat ini
@@ -70,7 +65,7 @@ class Scan extends Ci_Controller
 		} else {
 			$shift = "SHIFT 2";
 			$shift_start = "19:00:00";
-			$shift_end = "08:00:00";
+			$shift_end = "08:00:00 +1 day"; // tambahkan +1 day untuk shift 2
 		}
 
 		// Hitung keterlambatan dalam menit
